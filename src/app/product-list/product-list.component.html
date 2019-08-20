@@ -1,0 +1,23 @@
+<div class="row" *ngIf="!productDetails || productDetails.length === 0">
+    <h2>Product List</h2>
+  <div class="row padding-20" *ngFor="let product of products">
+    <div class="col-lg-6 col-md-6">
+      <p>{{product.name}}</p>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <button (click)="getProductDetails(product.definitionUrl)">ADD</button>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="productDetails && productDetails.length>0">
+  <h2>Product Details</h2>
+  <div class="row" *ngIf="productDetails && !isShowSuccessMessage">
+    <app-product-details [productDetails]="productDetails" (showSuccessMessage)="showSuccessMessage($event)" (backToProductList)="backToProductList()"></app-product-details>
+  </div>
+  <div class="row padding-30" *ngIf="productDetails && isShowSuccessMessage">
+    <div class="alert alert-success">Product Details Submitted Successfully!</div>
+    <div>
+      <button (click)="backToProductList()">Back To Product List</button>
+    </div>
+  </div>
+</div>

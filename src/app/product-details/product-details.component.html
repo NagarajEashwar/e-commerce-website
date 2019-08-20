@@ -1,0 +1,18 @@
+  <div class="row padding-20" *ngIf="productDetails">
+    <form [formGroup]="productDetailsForm" (ngSubmit)="onSubmit()">
+      <div  *ngFor="let detail of productDetails;let i=index;">
+        <label [attr.for]="detail.caption">{{detail.caption}}</label>
+        <input class="form-control" [formControlName]="detail.caption"
+                [id]="detail.caption" [type]="detail.type === 'bool'? 'checkbox': detail.type === 'text'?'text': 'number'" value="detail.defaultValue">
+        <div class="alert alert-danger" *ngIf="isFormSubmitted && productDetailsForm.controls[detail.caption].invalid">{{detail.caption}} is required</div>
+      </div>
+     <div class="row padding-20">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <button type="submit">Submit</button>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <button (click)="backToList()">Back To Product List</button>
+        </div>
+     </div>
+    </form>
+  <div>
